@@ -49,6 +49,7 @@
 \usepackage{textcomp}
 \usepackage[normalem]{ulem}
 \usepackage{wasysym}
+\usepackage{dirtree}
 
 
 \usepackage{semcolor,slidesec}
@@ -84,6 +85,8 @@
   numbersep=5pt
 }
 \newcommand{\cex}[1]{\textcolor{cexcolor}{\textit{#1}}}
+
+\newcommand{\shell}[1]{\texttt{\textbf{{\textcolor{Blue} \$}} #1}}
 
 \newcommand{\fullSlideImage}[1]{
   \begin{center}
@@ -170,16 +173,35 @@
 \begin{slide}
   \h{\texttt{cljs-kickoff}}
 
-
-
   There is some real work to standing up the file structure for any Clojure
   project, and ClojureScript is no exception.  That's where
   \texttt{cljs-kickoff}\footnote{\texttt{https://github.com/konrad-garus/cljs-kickoff}}
   comes in: it sets up a minimal Leiningen template for ClojureScript with
   \texttt{lein-cljsbuild}.
 
-  \texttt{lein new cljs-kickoff hello-world}
+  \shell{lein new cljs-kickoff hello-world}
+\end{slide}
 
+
+\begin{slide}
+  \h{\texttt{cljs-kickoff}}
+
+  \dirtree{%
+    .1 hello-world. 
+       .2 {project.clj}. 
+       .2 resources. 
+          .3 public. 
+             .4 css. 
+                .5 {page.css}. 
+             .4 {help.html}. 
+       .2 src. 
+          .3 clj. 
+             .4 hello\_world. 
+                .5 {server.clj}. 
+          .3 cljs. 
+             .4 hello\_world. 
+                .5 {client.cljs}. 
+  }
 \end{slide}
 
 
