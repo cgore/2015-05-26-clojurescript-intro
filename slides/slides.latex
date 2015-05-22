@@ -78,7 +78,10 @@
   commentstyle=\itshape\color{commentcolor},
   identifierstyle=\color{identifiercolor},
   keywordstyle=\color{keywordcolor},
-  upquote=true
+  upquote=true,
+  numbers=left,
+  numberstyle=\tiny\color{commentcolor},
+  numbersep=5pt
 }
 \newcommand{\cex}[1]{\textcolor{cexcolor}{\textit{#1}}}
 
@@ -108,6 +111,89 @@
   \maketitle
 
   \color{Black}
+\end{slide}
+
+
+\begin{slide}
+  \h{Why ClojureScript?}
+
+  Have you ever seen JavaScript?
+
+  \fullSlideImage{200-percent-mad.eps}
+\end{slide}
+
+
+\begin{slide}
+  \h{Why ClojureScript?}
+
+  Have you ever seen Clojure?
+
+  \fullSlideImage{200-percent-glad.eps}
+\end{slide}
+
+
+\begin{slide}
+  \h{How I'm going to do stuff.}
+
+  \begin{itemize}
+  \item I'm using Leiningen for the projects:\\
+    \texttt{http://leiningen.org/}
+
+  \item I'm using \texttt{cljs-kickoff} to template the project:\\
+    \texttt{https://github.com/konrad-garus/cljs-kickoff}
+
+  \item That uses \texttt{lein-cljsbuild}:\\
+    \texttt{https://github.com/emezeske/lein-cljsbuild}
+
+  \item And also \texttt{lein-ring}:\\
+    \texttt{https://github.com/weavejester/lein-ring}
+  \end{itemize}
+\end{slide}
+
+
+\begin{slide}
+  \h{ClojureScript History}
+
+  \begin{description}
+    \item[1958] LISP
+    \item[1969] ARPANET
+    \item[1984] Common Lisp
+    \item[1990] WWW
+    \item[1994] Netscape Navigator
+    \item[1995] JavaScript
+    \item[2007] Clojure
+    \item[2012?] ClojureScript
+  \end{description}
+\end{slide}
+
+
+\begin{slide}
+  \h{\texttt{cljs-kickoff}}
+
+
+
+  There is some real work to standing up the file structure for any Clojure
+  project, and ClojureScript is no exception.  That's where
+  \texttt{cljs-kickoff}\footnote{\texttt{https://github.com/konrad-garus/cljs-kickoff}}
+  comes in: it sets up a minimal Leiningen template for ClojureScript with
+  \texttt{lein-cljsbuild}.
+
+  \texttt{lein new cljs-kickoff hello-world}
+
+\end{slide}
+
+
+\begin{slide}
+  \h{\texttt{lein-cljsbuild}}
+
+  \texttt{https://github.com/emezeske/lein-cljsbuild}
+\end{slide}
+
+
+\begin{slide}
+  \h{\texttt{lein-ring}}
+
+  \texttt{https://github.com/weavejester/lein-ring}
 \end{slide}
 
 
