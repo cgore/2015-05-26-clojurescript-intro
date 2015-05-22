@@ -208,7 +208,14 @@
 \begin{slide}
   \h{\texttt{lein-cljsbuild}}
 
-  \texttt{https://github.com/emezeske/lein-cljsbuild}
+  Your beautiful ClojureScript code needs to be \textit{``compiled''} (air
+  quotes) into ugly JavaScript to actually work, and you can use
+  \texttt{lein-cljsbuild}\footnote{\texttt{https://github.com/emezeske/lein-cljsbuild}}
+  does that for you automatically whenever you change a relevant file.
+  
+  \textit{On a dedicated shell session:}
+
+  \shell{lein cljsbuild auto}
 \end{slide}
 
 

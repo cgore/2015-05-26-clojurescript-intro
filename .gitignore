@@ -13,3 +13,7 @@
 slides/slides.aux
 slides/slides.log
 slides/missfont.log
+
+# code:
+code/*/resources
+code/*/target
