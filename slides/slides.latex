@@ -72,7 +72,7 @@
 \definecolor{keywordcolor}{rgb}{0.1,0.3,0.1}
 \definecolor{cexcolor}{rgb}{0.25,0.25,0.4}
 \lstset{
-  basicstyle=\small\ttfamily,
+  basicstyle=\footnotesize\ttfamily,
   language=Lisp,
   morekeywords={make-instance},
   escapeinside={\%*}{*)},
@@ -222,7 +222,102 @@
 \begin{slide}
   \h{\texttt{lein-ring}}
 
-  \texttt{https://github.com/weavejester/lein-ring}
+  You will want a simple web server to put up your ClojureScript, and you
+  probably want it in Clojure.
+  Ring\footnote{\texttt{https://github.com/ring-clojure/ring}}
+  is a popular one, loosely similar in
+  approach to Ruby's Rack, and
+  \texttt{lein-ring}\footnote{\texttt{https://github.com/weavejester/lein-ring}}
+  provides a lot of nice Leiningen shortcuts for Ring.
+
+  \textit{On a dedicated shell session:}
+
+  \shell{lein ring server}
+\end{slide}
+
+
+\begin{slide}
+  \h{Hello, World!}
+
+  \fullSlideImage{hello-world-1.eps}
+\end{slide}
+
+
+\begin{slide}
+  \h{Hello, World!}
+
+  \fullSlideImage{hello-world-2.eps}
+\end{slide}
+
+
+\begin{slide}
+  \h{Hello, World!}
+
+  \fullSlideImage{hello-world-3.eps}
+\end{slide}
+
+
+\begin{slide}
+  \h{\texttt{project.clj}: Dependencies}
+
+\begin{lstlisting}
+(defproject hello-world "0.1.0-SNAPSHOT"
+  ;; ...
+  :dependencies [[org.clojure/clojure "1.5.1"]
+                 [org.clojure/clojurescript "0.0-2156"]
+                 [ring "1.2.1"]]
+  ;; ...
+  )
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{\texttt{project.clj}: Plugins}
+
+\begin{lstlisting}
+(defproject hello-world "0.1.0-SNAPSHOT"
+  ;; ...
+  :plugins [[lein-cljsbuild "1.0.2"]
+            [lein-ring "0.8.10"]]
+  ;; ...
+  )
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{\texttt{project.clj}: ClojureScript Build}
+
+\smaller
+\begin{lstlisting}
+(defproject hello-world "0.1.0-SNAPSHOT"
+  ;; ...
+  :hooks [leiningen.cljsbuild]
+  :source-paths ["src/clj"]
+  :cljsbuild { 
+    :builds {
+      :main {
+        :source-paths ["src/cljs"]
+        :compiler {:output-to "resources/public/js/cljs.js"
+                   :optimizations :simple
+                   :pretty-print true}
+        :jar true}}}
+  ;; ...
+  )
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{\texttt{project.clj}: Ring Server}
+
+\begin{lstlisting}
+(defproject hello-world "0.1.0-SNAPSHOT"
+  ;; ...
+  :main hello-world.server
+  :ring {:handler hello-world.server/app})
+\end{lstlisting}
 \end{slide}
 
 
