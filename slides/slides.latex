@@ -136,6 +136,17 @@
 
 
 \begin{slide}
+  \h{Why I Care}
+
+  I have a side project that I'm writing in Ruby on Rails.
+
+  The backend is mostly done, but I need to make a nicer frontend for it.
+
+  This means JavaScript needs to happen somehow.
+\end{slide}
+
+
+\begin{slide}
   \h{How I'm going to do stuff.}
 
   \begin{itemize}
@@ -525,6 +536,161 @@ js/x ; => 123
   This seems to be the only book out there, from 2012.
 
   \fullSlideImage{ClojureScript-Up-And-Running.eps}
+\end{slide}
+
+
+\begin{slide}
+  \h{Variables}
+
+\begin{lstlisting}
+;; Top-level variables.
+(def foo "bar") ; var foo = "bar"
+;; Local variables.
+(defn foo []       ; function foo() {
+  (let [bar 1      ;    var bar = 1;
+        baz 2]     ;    var baz = 2;
+    (+ bar baz 3)) ;    return bar + baz + 3;
+                   ; }
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{Destructuring Bind}
+
+\begin{lstlisting}
+(def m {:first "Robert"      ; var m = {first: "Robert",
+        :last "Rogers"       ;          last: "Rogers",
+        :born "11/07/1731"   ;          born: "11/07/1731",
+        :died "05/18/1795"}) ;          died: "05/18/1795"};
+(let [{:keys [first last born] m}] ; var first = m.first
+                                   ; var last = m.last
+                                   ; var born = m.born
+  ;; first + " " + last + " was born on " + born + ".";
+  (str first " " last " was born on " born "."))
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{Arrays}
+
+  In JavaScript:
+
+\begin{lstlisting}[language=Java]
+var a = new Array();
+var b = [];
+var c = [1 2 3];
+c[1] // => 2
+\end{lstlisting}
+
+  In ClojureScript:
+
+\begin{lstlisting}
+(def a (array))
+(def b (array 1 2 3))
+(nth b 1) ; => 2
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{Other Collections}
+
+  In ClojureScript there are also immutable vectors, immutable lists, and
+  immutable sets, not just arrays:
+
+\begin{lstlisting}
+;; Lists
+(def l (list))
+(def m '())
+(def n (list 1 2 3))
+(def o '(1 2 3)) ; n = o
+;; Vectors
+(def v (vector))
+(def u [])
+(def w [1 2 3])
+;; Sets
+(def s #{1 2 3})
+(def t #{1 1 1 2 2 2 3 3 3}) ; s = t
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{Hash Maps}
+
+  In JavaScript:
+
+\begin{lstlisting}[language=Java]
+var m = { // Keys must all be strings
+  "foo": 1,
+  "bar": 2
+};
+m["foo"];
+m.foo;
+\end{lstlisting}
+
+  In ClojureScript:
+
+\begin{lstlisting}
+(def m {:foo    1
+        :bar    2
+        12      3   ; Non-string keys
+        [1 2 3] 4}) ; Anything can be a key
+(get m :foo)
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{Functions with Variadic Arguments}
+
+  In JavaScript, you need to manipulate the arguments object yourself.
+  In ClojureScript, you can do this:
+
+\begin{lstlisting}
+(defn foo
+  ([]
+   "no arguments")
+  ([x]
+   (str "one argument - x = " x))
+  ([x y]
+   (str "two arguments - x+y = " (+ x y))))
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{Named Parameters and Default Values}
+
+  You can't do this in JavaScript.
+
+\begin{lstlisting}
+(defn foo [x y ; Positional arguments
+           & {:keys [bar baz]}] ; Keyword arguments
+  (+ x y bar baz))
+(foo 1 2 :bar 3 :baz 4) ; => 10
+(defn foo2 [x y
+            & {:keys [bar baz]
+               :or {bar 100     ; Default for bar
+                    baz 1000}}] ; Default for baz
+  (+ x y bar baz))
+(foo2 1 2) ; => 1103
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{My Project's Layout?}
+
+  \begin{enumerate}
+    \item The backend is in Ruby on Rails.
+    \item Single/multiple ClojureScript project(s)?
+    \item Single/multiple git repos?
+    \item JavaScript too, or just ClojureScript?
+    \item Other pitfalls?
+  \end{enumerate}
 \end{slide}
 
 
