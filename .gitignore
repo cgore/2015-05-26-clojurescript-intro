@@ -17,3 +17,4 @@ slides/missfont.log
 # code:
 code/*/resources
 code/*/target
+code/*/.lein*

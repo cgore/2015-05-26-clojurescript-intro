@@ -322,6 +322,213 @@
 
 
 \begin{slide}
+  \h{\texttt{src/clj/hello\_world/server.clj}}
+
+  This is pretty boring, a really simple server with a single static page.  The
+  most important part is the \texttt{script} directive.
+
+\begin{lstlisting}
+(defn render-app []
+  {:status 200
+   :headers {"Content-Type" "text/html"}
+   :body
+   (str "<!DOCTYPE html>"
+        ;; ...
+        "<p id=\"clickable\">Click me!</p>"
+        ;; ...
+        "<script src=\"js/cljs.js\"></script>"
+        ;; ...
+        )})
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{\texttt{src/cljs/hello\_world/client.cljs}}
+
+\begin{lstlisting}
+(ns hello-clojurescript)
+
+(defn handle-click []
+  (js/alert "Hello!"))
+
+(def clickable (.getElementById js/document "clickable"))
+(.addEventListener clickable "click" handle-click)
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{ClojureScript is Clojure!}
+
+  ClojureScript is great!
+  Everything you can do in Clojure, you can do in ClojureScript!%
+  \footnote{Except for when you can't.}
+
+\begin{lstlisting}
+(+ 1 2 3)
+
+(defn add2 [x]
+  (+ x 2))
+
+(def foo 42)
+
+(defn average [x y]
+  (/ (+ x y)
+     2))
+
+(map + [1 2 3]
+       [4 5 6])
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{You Can Get to JavaScript if You Need It}
+
+  Just like Java is hiding just under the covers of Clojure,
+  you have JavaScript hiding just under the covers of ClojureScript.
+  You can easily get to anything in JavaScript from ClojureScript.
+
+\begin{lstlisting}
+;; console.log("hi!")
+(.log js/console "hi!")
+;; document.getElementById("clickable")
+(.getElementById js/document "clickable")
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{ClojureScript Web REPL}
+
+  There is an online ClojureScript REPL at \texttt{clojurescript.net}.
+
+  \fullSlideImage{ClojureScript-web-REPL.eps}
+\end{slide}
+
+
+\begin{slide}
+  \h{Calling JavaScript Methods}
+
+  You can easily call methods on JavaScript objects from ClojureScript.
+
+\begin{lstlisting}
+;; Basic form
+(.the-method target-object args ...)
+;; document.getElementById("clickable")
+(def clickable (.getElementById js/document "clickable"))
+;; clickable.addEventListener("click", handle-click)
+(.addEventListener clickable "click" handle-click)
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{Accessing JavaScript Properties}
+
+  You can easily access the properties of JavaScript objects from ClojureScript.
+
+\begin{lstlisting}
+;; Basic form
+(.-property target-object -property)
+;;  document.title
+(.-title js/document) ; => "Some String"
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{Setting JavaScript Properties}
+
+  You can easily set the properties of JavaScript objects from ClojureScript.
+
+\begin{lstlisting}
+;; Basic form
+(set! (.-property target-object) new-value)
+;; document.title = "Hi There"
+(set! (.-title js/document) "Hi There")
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{Direct JavaScript}
+
+  JavaScript has an \texttt{eval} function, and we can get to it from
+  ClojureScript.
+
+\begin{lstlisting}
+(js/eval "2+2") ; => 4
+(js/eval "document.title = \"Hi there\"")
+(js/eval "x = 123")
+js/x ; => 123
+(js/eval "Math.random()") ; => 0.9831978017934505
+(rand) ; You would probably do this instead.
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{Using External JavaScript Libraries}
+
+  You can easily use existing JavaScript libraries from ClojureScript.
+
+  \fullSlideImage{jQuery-in-ClojureScript.eps}
+\end{slide}
+
+
+\begin{slide}
+  \h{ClojureScript REPL in Emacs}
+
+  A web REPL is nice, but to do real work I need a real REPL in a real text
+  editor\footnote{That means Emacs or Vim, and since this is a Lisp, Emacs
+    thanks to nepotism.}.  We can use the Austin%
+  \footnote{\texttt{https://github.com/cemerick/austin}}
+  plugin for this.
+  Add the following to your \texttt{project.clj}%
+  \footnote{An example working project is in the Austin repo.  The versions from
+  \texttt{cljs-kickoff} don't seem to play well with Austin.}
+ file:
+
+\begin{lstlisting}
+:profiles {:dev {:plugins [[com.cemerick/austin "0.1.6"]]}}
+\end{lstlisting}
+
+  Then run \texttt{lein repl} (or the nREPL inside of Emacs) in the project and launch:
+
+\begin{lstlisting}
+(cemerick.austin.repls/exec)
+\end{lstlisting}
+\end{slide}
+
+
+\begin{slide}
+  \h{ClojureScript Koans: \texttt{clojurescriptkoans.com}}
+
+  \fullSlideImage{ClojureScriptKoans.eps}
+\end{slide}
+
+
+\begin{slide}
+  \h{Modern ClojureScript}
+
+  A really nice set of tutorials is \textit{Modern ClojureScript}, available
+  at:\\
+  \texttt{https://github.com/magomimmo/modern-cljs}
+\end{slide}
+
+
+\begin{slide}
+  \h{ClojureScript: Up and Running}
+
+  This seems to be the only book out there, from 2012.
+
+  \fullSlideImage{ClojureScript-Up-And-Running.eps}
+\end{slide}
+
+
+\begin{slide}
   \begin{center}
     \textcolor{\hc}{\textbf{\emph{\Huge{Questions?}}}}
   \end{center}
